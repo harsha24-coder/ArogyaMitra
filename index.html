@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ఆరోగ్య మిత్ర | Arogya Mitra</title>
+  <style>
+    :root {
+      --bg: #f7fbf8;
+      --surface: #fff;
+      --surface2: #eef7f1;
+      --text: #17332a;
+      --muted: #60756d;
+      --primary: #087f5b;
+      --primary2: #0ca678;
+      --accent: #f4a340;
+      --danger: #d92d20;
+      --warning: #b7791f;
+      --border: #dbe9e2;
+      --shadow: 0 16px 40px rgba(21, 65, 49, .10);
+      --radius: 22px;
+    }
+
+    body.dark {
+      --bg: #090f0d;
+      --surface: #111a16;
+      --surface2: #17241e;
+      --text: #f0f7f3;
+      --muted: #a8bbb3;
+      --primary: #34d399;
+      --primary2: #10b981;
+      --accent: #f6b85c;
+      --border: #263a31;
+      --shadow: 0 16px 40px rgba(0, 0, 0, .35);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif
+    }
+
+    button,
+    input {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 20px;
+      color: var(--primary);
+      margin-right: auto
+    }
+
+    .logoMark {
+      width: 43px;
+      height: 43px;
+      border-radius: 14px;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      box-shadow: 0 8px 18px rgba(8, 127, 91, .22)
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 6px
+    }
+
+    .navlinks button,
+    .iconBtn {
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 11px 13px;
+      border-radius: 12px
+    }
+
+    .navlinks button:hover,
+    .iconBtn:hover {
+      background: var(--surface2)
+    }
+
+    .iconBtn {
+      font-size: 20px
+    }
+
+    main {
+      max-width: 1180px;
+      margin: auto;
+      padding: 28px 20px 100px
+    }
+
+    .page {
+      display: none
+    }
+
+    .page.active {
+      display: block
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 30px;
+      align-items: center;
+      padding: 42px 0
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--surface2);
+      color: var(--primary);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 13px
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: 1.03;
+      margin: 18px 0 14px;
+      letter-spacing: -2px
+    }
+
+    h2 {
+      font-size: 32px;
+      margin: 0 0 10px
+    }
+
+    h3 {
+      margin: 0 0 8px
+    }
+
+    .lead {
+      font-size: 19px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 690px
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 15px;
+      padding: 15px 19px;
+      font-weight: 900;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px
+    }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 25px rgba(8, 127, 91, .22)
+    }
+
+    .secondary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text)
+    }
+
+    .heroActions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 25px 0
+    }
+
+    .trust {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700
+    }
+
+    .heroCard {
+      background: linear-gradient(145deg, var(--primary), #075b45);
+      color: white;
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      min-height: 330px;
+      position: relative;
+      overflow: hidden
+    }
+
+    .heroCard:after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border: 40px solid rgba(255, 255, 255, .08);
+      border-radius: 50%;
+      right: -80px;
+      bottom: -80px
+    }
+
+    .heroIcon {
+      font-size: 76px
+    }
+
+    .miniCard {
+      background: rgba(255, 255, 255, .13);
+      border: 1px solid rgba(255, 255, 255, .18);
+      padding: 14px;
+      border-radius: 16px;
+      margin-top: 20px
+    }
+
+    .section {
+      margin: 35px 0
+    }
+
+    .sectionHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 15px;
+      margin-bottom: 18px
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 21px;
+      box-shadow: var(--shadow)
+    }
+
+    .cardIcon {
+      font-size: 32px;
+      margin-bottom: 12px
+    }
+
+    .muted {
+      color: var(--muted);
+      line-height: 1.55
+    }
+
+    .tipCard {
+      border-left: 5px solid var(--accent)
+    }
+
+    .alert {
+      background: #fff4df;
+      color: #68420c;
+      padding: 13px 16px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-radius: 13px;
+      border: 1px solid #f2d59e
+    }
+
+    body.dark .alert {
+      background: #332713;
+      color: #ffd890;
+      border-color: #60491e
+    }
+
+    .ticker {
+      animation: scroll 22s linear infinite;
+      display: inline-block
+    }
+
+    @keyframes scroll {
+      from {
+        transform: translateX(100%)
+      }
+
+      to {
+        transform: translateX(-100%)
+      }
+    }
+
+    .flow {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .step {
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: var(--surface2);
+      font-weight: 800;
+      color: var(--primary)
+    }
+
+    .formBox {
+      max-width: 760px;
+      margin: 20px auto
+    }
+
+    .language {
+      display: flex;
+      background: var(--surface2);
+      padding: 5px;
+      border-radius: 14px;
+      gap: 5px;
+      margin-bottom: 18px
+    }
+
+    .language button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 11px;
+      border-radius: 10px;
+      font-weight: 800;
+      color: var(--muted)
+    }
+
+    .language .selected {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .08)
+    }
+
+    .chat {
+      height: 510px;
+      overflow: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px
+    }
+
+    .msg {
+      max-width: 82%;
+      padding: 13px 16px;
+      border-radius: 18px;
+      margin: 10px 0;
+      line-height: 1.5
+    }
+
+    .bot {
+      background: var(--surface2);
+      border-bottom-left-radius: 5px
+    }
+
+    .user {
+      background: var(--primary);
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 5px
+    }
+
+    .chatInput {
+      display: flex;
+      gap: 9px;
+      margin-top: 12px
+    }
+
+    .chatInput input {
+      flex: 1;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 15px;
+      padding: 15px;
+      outline: none
+    }
+
+    .questionCard {
+      background: var(--surface2);
+      padding: 17px;
+      border-radius: 17px;
+      margin: 15px 0
+    }
+
+    .choiceRow {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap
+    }
+
+    .choice {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-weight: 800
+    }
+
+    .result {
+      padding: 25px;
+      border-radius: 24px;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      box-shadow: var(--shadow)
+    }
+
+    .risk {
+      font-size: 30px;
+      font-weight: 950
+    }
+
+    .green {
+      color: #078a5c
+    }
+
+    .yellow {
+      color: #b7791f
+    }
+
+    .red {
+      color: #d92d20
+    }
+
+    .progress {
+      height: 8px;
+      background: var(--surface2);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 15px 0
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      background: var(--primary);
+      width: 0;
+      transition: .4s
+    }
+
+    .sos {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      border: 0;
+      background: var(--danger);
+      color: #fff;
+      border-radius: 999px;
+      padding: 15px 19px;
+      font-weight: 950;
+      box-shadow: 0 12px 30px rgba(217, 45, 32, .35)
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .58);
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 20px
+    }
+
+    .modal.open {
+      display: grid
+    }
+
+    .modalBox {
+      max-width: 520px;
+      width: 100%;
+      background: var(--surface);
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: var(--shadow)
+    }
+
+    .list {
+      display: grid;
+      gap: 12px
+    }
+
+    .healthItem {
+      display: flex;
+      gap: 14px;
+      align-items: center
+    }
+
+    .healthItem .big {
+      font-size: 30px
+    }
+
+    .map {
+      height: 300px;
+      border-radius: 20px;
+      background: radial-gradient(circle at 25% 35%, #b7dfc9 0 8%, transparent 9%), radial-gradient(circle at 70% 65%, #b7dfc9 0 7%, transparent 8%), linear-gradient(135deg, #e9f4ee, #d8ebe1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    body.dark .map {
+      background: linear-gradient(135deg, #182820, #101a15)
+    }
+
+    .pin {
+      position: absolute;
+      font-size: 31px
+    }
+
+    .pin1 {
+      left: 23%;
+      top: 30%
+    }
+
+    .pin2 {
+      left: 67%;
+      top: 56%
+    }
+
+    .pin3 {
+      left: 46%;
+      top: 70%
+    }
+
+    footer {
+      padding: 25px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center
+    }
+
+    @media(max-width:850px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .navlinks {
+        display: none
+      }
+
+      h1 {
+        letter-spacing: -1px
+      }
+    }
+
+    @media(max-width:560px) {
+      main {
+        padding: 18px 14px 100px
+      }
+
+      .grid {
+        grid-template-columns: 1fr
+      }
+
+      .hero {
+        padding: 25px 0
+      }
+
+      .card {
+        padding: 17px
+      }
+
+      .sos {
+        right: 12px;
+        bottom: 12px
+      }
+
+      .chat {
+        height: 450px
+      }
+
+      .lead {
+        font-size: 17px
+      }
+    }
+
+    .loginScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg);
+      display: none;
+      overflow: auto
+    }
+
+    .loginScreen.show {
+      display: block
+    }
+
+    .loginShell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr
+    }
+
+    .loginVisual {
+      position: relative;
+      overflow: hidden;
+      padding: 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+      background: linear-gradient(145deg, #075b45, #087f5b 55%, #0ca678)
+    }
+
+    .loginVisual:before {
+      content: "";
+      position: absolute;
+      width: 430px;
+      height: 430px;
+      right: -180px;
+      top: -130px;
+      border: 1px solid rgba(255, 255, 255, .15);
+      border-radius: 50%;
+      box-shadow: 0 0 0 55px rgba(255, 255, 255, .035), 0 0 0 110px rgba(255, 255, 255, .025)
+    }
+
+    .loginBrand {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-weight: 950;
+      font-size: 25px
+    }
+
+    .loginMark {
+      width: 54px;
+      height: 54px;
+      border-radius: 17px;
+      background: white;
+      color: #087f5b;
+      display: grid;
+      place-items: center;
+      font-size: 28px
+    }
+
+    .loginVisual h1 {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(40px, 5vw, 66px);
+      letter-spacing: -2px;
+      max-width: 650px;
+      margin: 55px 0 18px
+    }
+
+    .loginVisual p {
+      position: relative;
+      z-index: 2;
+      max-width: 570px;
+      font-size: 18px;
+      line-height: 1.7;
+      opacity: .92
+    }
+
+    .healthFeatures {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 600px;
+      margin-top: 28px
+    }
+
+    .healthFeature {
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 17px;
+      padding: 15px
+    }
+
+    .healthFeature b {
+      display: block;
+      margin-bottom: 5px
+    }
+
+    .healthFeature span {
+      font-size: 13px;
+      opacity: .8
+    }
+
+    .loginPanel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px;
+      background: var(--surface)
+    }
+
+    .loginBox {
+      width: min(440px, 100%);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow)
+    }
+
+    .loginBox h2 {
+      font-size: 30px;
+      margin-bottom: 7px
+    }
+
+    .loginBox .sub {
+      color: var(--muted);
+      margin-bottom: 25px;
+      line-height: 1.5
+    }
+
+    .loginField {
+      margin: 16px 0
+    }
+
+    .loginField label {
+      display: block;
+      font-weight: 850;
+      margin-bottom: 8px
+    }
+
+    .loginField input,
+    .loginField select {
+      width: 100%;
+      padding: 15px 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface2);
+      color: var(--text);
+      outline: none
+    }
+
+    .loginField input:focus,
+    .loginField select:focus {
+      border-color: var(--primary)
+    }
+
+    .loginOptions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin: 13px 0 20px
+    }
+
+    .loginOptions label {
+      display: flex;
+      gap: 7px;
+      align-items: center
+    }
+
+    .loginOptions input {
+      accent-color: var(--primary)
+    }
+
+    .loginBtn {
+      width: 100%;
+      margin-top: 5px
+    }
+
+    .loginDemo {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 13px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 15px;
+      text-align: center
+    }
+
+    .loginFooter {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+      margin-top: 18px
+    }
+
+    .loginToggle {
+      display: flex;
+      background: var(--surface2);
+      border-radius: 13px;
+      padding: 4px;
+      margin-bottom: 18px
+    }
+
+    .loginToggle button {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 850
+    }
+
+    .loginToggle .active {
+      background: var(--surface);
+      color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .08)
+    }
+
+    .profileChip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 8px 11px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800
+    }
+
+    .logoutBtn {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: 11px;
+      padding: 9px 11px;
+      font-weight: 800
+    }
+
+    @media(max-width:800px) {
+      .loginShell {
+        grid-template-columns: 1fr
+      }
+
+      .loginVisual {
+        display: none
+      }
+
+      .loginPanel {
+        min-height: 100vh;
+        padding: 20px
+      }
+
+      .loginBox {
+        box-shadow: none;
+        border: 0;
+        padding: 22px
+      }
+
+      .profileChip {
+        display: none
+      }
+    }
+
+    .quoteWrap {
+      position: relative;
+      z-index: 2;
+      max-width: 620px
+    }
+
+    .quoteCard {
+      position: relative;
+      margin: 18px 0;
+      padding: 22px 24px 18px 44px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .11);
+      border: 1px solid rgba(255, 255, 255, .18);
+      backdrop-filter: blur(8px)
+    }
+
+    .quoteCard p {
+      font-size: 19px !important;
+      line-height: 1.6 !important;
+      margin: 0 0 8px !important
+    }
+
+    .quoteCard small {
+      opacity: .72;
+      font-weight: 800
+    }
+
+    .quoteMark {
+      position: absolute;
+      left: 15px;
+      top: 9px;
+      font-size: 44px;
+      line-height: 1;
+      opacity: .55
+    }
+
+    .loginHealthLine {
+      margin-top: 24px;
+      font-size: 13px;
+      font-weight: 800;
+      opacity: .82
+    }
+
+    .appLang {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 4px
+    }
+
+    .appLang button {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 9px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 900
+    }
+
+    .appLang button.active {
+      background: var(--primary);
+      color: white
+    }
+
+    .loginLang {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 15px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .loginLang button {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 9px;
+      font-weight: 850
+    }
+
+    .loginLang button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary)
+    }
+
+    @media(max-width:800px) {
+      .quoteWrap h1 {
+        font-size: 43px
+      }
+
+      .quoteCard p {
+        font-size: 17px !important
+      }
+    }
+
+    .demoLoginBtn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 14px 18px;
+      border: 1.5px solid var(--primary);
+      border-radius: 14px;
+      background: transparent;
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .demoLoginBtn:hover {
+      background: var(--primary);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .loginToggle button {
+      min-height: 48px;
+      font-size: 15px;
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loginScreen" class="loginScreen show">
+    <div class="loginShell">
+      <div class="loginVisual">
+        <div class="loginBrand"><span class="loginMark">❤</span><span>ఆరోగ్య మిత్ర</span></div>
+        <div class="quoteWrap">
+          <h1>మీ ఆరోగ్యానికి<br>డిజిటల్ మిత్రుడు.</h1>
+          <div class="quoteCard"><span class="quoteMark">“</span>
+            <p>ప్రతి గ్రామానికి ఆరోగ్య సమాచారం, ప్రతి కుటుంబానికి ఆరోగ్య భరోసా.</p><small>— ఆరోగ్య మిత్ర</small>
+          </div>
+          <div class="quoteCard"><span class="quoteMark">“</span>
+            <p>Understand your symptoms. Choose the right care. Stay informed.</p><small>— Arogya Mitra</small>
+          </div>
+          <div class="loginHealthLine">🩺 Telugu-first &nbsp; • &nbsp; 📶 Low-bandwidth &nbsp; • &nbsp; 🏥 Rural
+            healthcare access</div>
+        </div>
+      </div>
+      <div class="loginPanel">
+        <div class="loginBox">
+          <div class="loginLang"><span>Language / భాష:</span><button id="loginTe" class="active"
+              onclick="setAppLanguage('te')">తెలుగు</button><button id="loginEn"
+              onclick="setAppLanguage('en')">English</button></div>
+          <div class="loginToggle"><button id="loginTab" class="active"
+              onclick="switchAuth('login')">Login</button><button id="signupTab" onclick="switchAuth('signup')">Create
+              Account</button></div>
+          <div id="authLogin">
+            <h2 id="loginTitle">Welcome back 👋</h2>
+            <p id="loginSub" class="sub">ఆరోగ్య మిత్రలోకి తిరిగి స్వాగతం.</p>
+            <div class="loginField"><label>Mobile Number</label><input id="loginPhone" type="tel" maxlength="10"
+                placeholder="Enter 10-digit mobile number"></div>
+            <div class="loginField"><label>PIN / Password</label><input id="loginPassword" type="password"
+                placeholder="Enter your PIN"></div>
+            <div class="loginOptions"><label><input type="checkbox"> Remember me</label><span>Demo login</span></div>
+            <button class="btn primary loginBtn" onclick="performLogin()">🔐 Login to Arogya Mitra</button>
+            <button type="button" class="btn demoLoginBtn" onclick="demoLogin()">🎯 Demo Login</button>
+          </div>
+          <div id="authSignup" style="display:none">
+            <h2>Join ఆరోగ్య మిత్ర</h2>
+            <p class="sub">Create a simple profile for the prototype.</p>
+            <div class="loginField"><label>Your Name</label><input id="signupName" type="text"
+                placeholder="Enter your name"></div>
+            <div class="loginField"><label>Mobile Number</label><input id="signupPhone" type="tel" maxlength="10"
+                placeholder="Enter 10-digit mobile number"></div>
+            <div class="loginField"><label>Preferred Language</label><select id="signupLanguage">
+                <option>తెలుగు</option>
+                <option>English</option>
+              </select></div>
+            <button class="btn primary loginBtn" onclick="performSignup()">👤 Create Health Profile</button>
+          </div>
+
+          <div class="loginDemo">🔒 Prototype only: no real medical records or credentials are transmitted.</div>
+          <div class="loginFooter">Preliminary information only — not a substitute for professional medical advice.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header>
+    <div class="nav">
+      <div class="logo"><span class="logoMark">❤</span><span>ఆరోగ్య మిత్ర</span></div>
+      <div class="navlinks">
+        <button onclick="showPage('home')">Home</button><button onclick="showPage('check')">Symptom Check</button>
+        <button onclick="showPage('health')">My Health</button><button onclick="showPage('care')">Nearby
+          Care</button><button onclick="showPage('about')">How It Works</button>
+      </div>
+      <div class="appLang" title="Application language">
+        <button id="appTe" class="active" onclick="setAppLanguage('te')">తెలుగు</button>
+        <button id="appEn" onclick="setAppLanguage('en')">English</button>
+      </div>
+      <div id="profileArea" style="display:flex;align-items:center;gap:7px"><span id="profileChip"
+          class="profileChip">👤 Guest</span><button class="logoutBtn" onclick="logout()">Logout</button></div><button
+        class="iconBtn" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <div class="alert"><span class="ticker">⚠️ Community Health Alert: Seasonal fever and mosquito-borne illness
+          prevention — use clean water, remove stagnant water, and seek care early if symptoms worsen.</span></div>
+      <div class="hero">
+        <div>
+          <span class="badge">🌾 Rural Andhra Pradesh • Telugu-first healthcare access</span>
+          <h1>మీ ఆరోగ్యం కోసం<br><span style="color:var(--primary)">ఆరోగ్య మిత్ర</span></h1>
+          <p id="heroLead" class="lead">మీ లక్షణాలను సులభంగా చెప్పండి. ఆరోగ్య మిత్ర మీకు ముందుగా ఏం చేయాలో, ఎప్పుడు
+            వైద్యుడిని కలవాలో, దగ్గరలోని ఆరోగ్య కేంద్రాన్ని ఎలా చేరుకోవాలో చెబుతుంది.</p>
+          <p id="heroLead2" class="lead" style="font-size:15px">మీ లక్షణాలను తెలుగు లేదా ఇంగ్లీష్‌లో చెప్పండి. సులభమైన
+            ప్రాథమిక ఆరోగ్య మార్గదర్శకత పొందండి.</p>
+          <div class="heroActions"><button id="start" class="btn primary" onclick="startCheck()">🩺 లక్షణాల పరీక్ష
+              ప్రారంభించండి</button><button id="find" class="btn secondary" onclick="showPage('care')">📍 దగ్గరలోని
+              ఆరోగ్య కేంద్రం</button></div>
+          <div class="trust"><span>✓ ASHA-friendly</span><span>✓ Low-bandwidth design</span><span>✓ Simple
+              Telugu</span><span>✓ Not a doctor replacement</span></div>
+        </div>
+        <div class="heroCard">
+          <div class="heroIcon">👩‍⚕️</div>
+          <h2 id="heroCardTitle" style="margin-top:8px">మీ ఆరోగ్య మిత్రుడు</h2>
+          <p id="heroCardText" style="opacity:.9;line-height:1.6">లక్షణాలను అర్థం చేసుకోవడానికి మరియు సరైన స్థాయి
+            సంరక్షణను ఎంచుకోవడానికి సహాయపడే స్నేహపూర్వక మొదటి అడుగు.</p>
+          <div class="miniCard">🟢 Self-care &nbsp; 🟡 PHC soon &nbsp; 🔴 Emergency</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sectionHead">
+          <div>
+            <h2 id="today">ఈరోజు ఆరోగ్య సూచన</h2>
+            <p id="todaySub" class="muted">రోజువారీ ఆరోగ్య సూచన</p>
+          </div>
+        </div>
+        <div class="card tipCard">
+          <div class="cardIcon">💧</div>
+          <h3 id="waterTitle">సురక్షితమైన నీరు తాగండి</h3>
+          <p id="waterText" class="muted">నీటిని మరిగించి లేదా సురక్షితమైన తాగునీటిని ఉపయోగించండి. ముఖ్యంగా విరేచనాలు
+            ఉన్నప్పుడు తగినంత ద్రవాలను తీసుకోండి.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sectionHead">
+          <div>
+            <h2 id="important">మీ కోసం ముఖ్యమైనవి</h2>
+            <p class="muted">Simple tools for everyday health access.</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card" onclick="showPage('health')">
+            <div class="cardIcon">📖</div>
+            <h3 id="healthLog">నా ఆరోగ్య లాగ్</h3>
+            <p id="healthLogText" class="muted">మీ గత symptom checks ను చూడండి.</p>
+          </div>
+          <div class="card" onclick="showPage('reminders')">
+            <div class="cardIcon">💉</div>
+            <h3 id="vaccines">టీకాలు & పథకాలు</h3>
+            <p id="vaccinesText" class="muted">టీకాలు మరియు ప్రభుత్వ ఆరోగ్య పథకాల సమాచారం.</p>
+          </div>
+          <div class="card" onclick="showPage('care')">
+            <div class="cardIcon">🏥</div>
+            <h3 id="nearbyTitle">దగ్గరలోని ఆరోగ్య కేంద్రం</h3>
+            <p id="nearbyText" class="muted">PHC, ఆసుపత్రి మరియు టెలిమెడిసిన్ ఎంపికలు.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="check" class="page">
+      <div class="formBox">
+        <div class="sectionHead">
+          <div>
+            <h2 id="checkTitle">🩺 ఆరోగ్య మిత్ర Check</h2>
+            <p id="checkSub" class="muted">దశలవారీ లక్షణాల మార్గదర్శకత</p>
+          </div><span class="badge">Prototype</span>
+        </div>
+        <div class="language"><button id="teBtn" class="selected" onclick="setLang('te')">తెలుగు</button><button
+            id="enBtn" onclick="setLang('en')">English</button></div>
+        <div class="progress"><span id="progress"></span></div>
+        <div class="chat" id="chat"></div>
+        <div class="chatInput"><input id="symptomInput" placeholder="మీ లక్షణాన్ని టైప్ చేయండి..."
+            onkeydown="if(event.key==='Enter')sendSymptom()"><button class="btn secondary"
+            onclick="voiceMock()">🎙️</button><button id="send" class="btn primary"
+            onclick="sendSymptom()">పంపండి</button></div>
+      </div>
+    </section>
+
+    <section id="result" class="page">
+      <div class="formBox">
+        <div class="sectionHead">
+          <div>
+            <h2 id="resultTitle">మీ ఆరోగ్య ఫలితం</h2>
+            <p id="resultSub" class="muted">ప్రాథమిక triage మార్గదర్శకత</p>
+          </div>
+        </div>
+        <div id="resultBox"></div>
+      </div>
+    </section>
+
+    <section id="health" class="page">
+      <div class="sectionHead">
+        <div>
+          <h2 id="healthTitle">📖 నా ఆరోగ్య లాగ్</h2>
+          <p id="healthSub" class="muted">మీ గత ఆరోగ్య పరీక్షలు</p>
+        </div><button id="newCheck" class="btn primary" onclick="startCheck()">＋ కొత్త పరీక్ష</button>
+      </div>
+      <div id="history" class="list"></div>
+    </section>
+
+    <section id="care" class="page">
+      <div class="sectionHead">
+        <div>
+          <h2 id="careTitle">📍 దగ్గరలోని ఆరోగ్య కేంద్రాలు</h2>
+          <p id="careSub" class="muted">డెమో స్థానాలు — నిజమైన ప్రభుత్వ డేటాతో భర్తీ చేయండి.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="map"><span class="pin pin1">📍</span><span class="pin pin2">📍</span><span
+              class="pin pin3">📍</span></div>
+        </div>
+        <div class="card">
+          <h3 id="phc">🏥 ప్రాథమిక ఆరోగ్య కేంద్రం</h3>
+          <p class="muted">Demo PHC • 2.4 km away<br>Open: 9:00 AM – 5:00 PM</p><button class="btn primary"
+            onclick="callNumber('108')">📞 Emergency: 108</button>
+        </div>
+        <div class="card">
+          <h3 id="asha">👩‍⚕️ ASHA కార్యకర్త</h3>
+          <p class="muted">Demo village health worker<br>Available for local guidance.</p><button id="contact"
+            class="btn secondary" onclick="alert('Demo contact: replace with your village ASHA worker number.')">☎
+            ASHAను సంప్రదించండి</button>
+        </div>
+      </div>
+      <div class="section grid">
+        <div class="card">
+          <div class="cardIcon">📱</div>
+          <h3 id="tele">టెలిమెడిసిన్</h3>
+          <p class="muted">Use a government telemedicine service where available. This prototype uses demo information.
+          </p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">🚑</div>
+          <h3 id="emergency">అత్యవసర సహాయం</h3>
+          <p class="muted">For serious or life-threatening symptoms, seek emergency care immediately.</p><button
+            id="call" class="btn primary" onclick="callNumber('108')">108కు కాల్ చేయండి</button>
+        </div>
+        <div class="card">
+          <div class="cardIcon">📶</div>
+          <h3>Connectivity</h3>
+          <p id="connectText" class="muted">తక్కువ డేటా వినియోగం: స్క్రీన్‌లు తేలికగా ఉంచబడ్డాయి మరియు సేవ్ చేసిన
+            స్థానిక లాగ్‌లను చూపించవచ్చు.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reminders" class="page">
+      <div class="sectionHead">
+        <div>
+          <h2 id="reminderTitle">💉 టీకాలు & ప్రభుత్వ పథకాలు</h2>
+          <p id="reminderSub" class="muted">SIH ప్రోటోటైప్ కోసం డెమో సమాచారం.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="cardIcon">👶</div>
+          <h3>Child Immunization</h3>
+          <p class="muted">Keep the child's immunization card updated and follow the schedule provided by your local
+            health facility.</p><button id="viewSchedule" class="btn secondary"
+            onclick="alert('Demo: connect this card to the official national immunization schedule in production.')">షెడ్యూల్
+            చూడండి</button>
+        </div>
+        <div class="card">
+          <div class="cardIcon">🏥</div>
+          <h3 id="scheme">🏥 ఆరోగ్యశ్రీ</h3>
+          <p class="muted">Government health coverage information can be surfaced here for eligible families.</p><button
+            id="schemeInfo" class="btn secondary"
+            onclick="alert('Demo scheme information. Production version should link to official government sources.')">పథకం
+            సమాచారం</button>
+        </div>
+        <div class="card">
+          <div class="cardIcon">🤝</div>
+          <h3>ASHA Support</h3>
+          <p class="muted">ASHA workers can help families navigate local public-health services and referrals.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="page">
+      <div class="hero" style="padding-top:20px">
+        <div><span id="arch" class="badge">SIH ప్రోటోటైప్ ఆర్కిటెక్చర్</span>
+          <h1 style="font-size:48px">How it works</h1>
+          <p id="aboutSub" class="lead">తెలుగు-ప్రాధాన్యత, తక్కువ డేటా వినియోగంతో లక్షణాల నుంచి సరైన ఆరోగ్య సేవ వరకు
+            మార్గదర్శకత.</p>
+        </div>
+        <div class="heroCard">
+          <div class="heroIcon">🧠</div>
+          <h2 id="teluguNlp">తెలుగు NLP + Triage</h2>
+          <p>Prototype logic is rule-based. A production system would require clinical validation, safety controls,
+            privacy safeguards and approved medical workflows.</p>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="cardIcon">1️⃣</div>
+          <h3>Understand</h3>
+          <p class="muted">User describes symptoms in Telugu or English.</p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">2️⃣</div>
+          <h3>Ask</h3>
+          <p class="muted">Bot asks duration, severity and associated symptoms.</p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">3️⃣</div>
+          <h3>Triage</h3>
+          <p class="muted">Rule-based demo assigns self-care, PHC or emergency guidance.</p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">4️⃣</div>
+          <h3>Care</h3>
+          <p class="muted">Shows simple food, rest and escalation guidance.</p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">5️⃣</div>
+          <h3>Connect</h3>
+          <p class="muted">Points users toward nearby public healthcare options.</p>
+        </div>
+        <div class="card">
+          <div class="cardIcon">6️⃣</div>
+          <h3>Remember</h3>
+          <p class="muted">Saves a local demo history for family/ASHA-assisted tracking.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="sos" onclick="openSOS()">🚨 SOS 108</button>
+  <div class="modal" id="sosModal">
+    <div class="modalBox">
+      <h2>🚨 Emergency Help</h2>
+      <p class="muted">If this is a serious or life-threatening emergency, seek emergency care immediately.</p>
+      <div class="grid" style="grid-template-columns:1fr 1fr"><button class="btn primary" onclick="callNumber('108')">📞
+          Call 108</button><button class="btn secondary" onclick="closeSOS()">Close</button></div>
+      <p class="muted" style="font-size:13px;margin-top:16px">Prototype note: verify local emergency/PHC contact details
+        before deployment.</p>
+    </div>
+  </div>
+  <footer>ఆరోగ్య మిత్ర • SIH Front-End Prototype • Preliminary information only — not a substitute for professional
+    medical advice.</footer>
+
+  <script>
+    let lang = 'te', step = 0, answers = {}, symptom = '', history = JSON.parse(localStorage.getItem('arogyaHistory') || '[]');
+
+    const flows = {
+      te: [
+        { q: 'మీ ప్రధాన లక్షణం ఏమిటి?', type: 'text' },
+        { q: 'ఈ లక్షణం ఎంతకాలంగా ఉంది?', type: 'choice', opts: ['ఈరోజే', '2–3 రోజులు', '4–7 రోజులు', '1 వారం కంటే ఎక్కువ'] },
+        { q: 'లక్షణం తీవ్రత ఎలా ఉంది?', type: 'choice', opts: ['తేలికగా', 'మధ్యస్థంగా', 'చాలా తీవ్రంగా'] },
+        { q: 'శ్వాస తీసుకోవడంలో ఇబ్బంది, మూర్ఛ, తీవ్రమైన ఛాతి నొప్పి లేదా ఎక్కువ రక్తస్రావం ఉందా?', type: 'choice', opts: ['లేదు', 'అవును'] }
+      ],
+      en: [
+        { q: 'What is your main symptom?', type: 'text' },
+        { q: 'How long have you had this symptom?', type: 'choice', opts: ['Today', '2–3 days', '4–7 days', 'More than 1 week'] },
+        { q: 'How severe is it?', type: 'choice', opts: ['Mild', 'Moderate', 'Very severe'] },
+        { q: 'Do you have difficulty breathing, fainting, severe chest pain, or heavy bleeding?', type: 'choice', opts: ['No', 'Yes'] }
+      ]
+    };
+
+
+
+
+    const translations = {
+      te: {
+        nav: ['హోమ్', 'లక్షణాల పరీక్ష', 'నా ఆరోగ్యం', 'దగ్గరలోని ఆరోగ్య కేంద్రం', 'ఎలా పనిచేస్తుంది'],
+        loginTitle: 'స్వాగతం 👋', loginSub: 'ఆరోగ్య మిత్రలోకి తిరిగి స్వాగతం.', mobile: 'మొబైల్ నంబర్', pin: 'PIN / పాస్‌వర్డ్', mobilePh: '10 అంకెల మొబైల్ నంబర్ నమోదు చేయండి', pinPh: 'మీ PIN నమోదు చేయండి', remember: 'నన్ను గుర్తుంచుకోండి', demo: 'డెమో లాగిన్', loginBtn: '🔐 ఆరోగ్య మిత్రలోకి లాగిన్', create: 'ఖాతా సృష్టించండి', createSub: 'ప్రోటోటైప్ కోసం మీ ఆరోగ్య ప్రొఫైల్‌ను సృష్టించండి', name: 'మీ పేరు', namePh: 'మీ పేరు నమోదు చేయండి', language: 'ఇష్టమైన భాష', createBtn: '👤 ఆరోగ్య ప్రొఫైల్ సృష్టించండి',
+        heroTitle: 'మీ ఆరోగ్యానికి<br><span style="color:var(--primary)">ఆరోగ్య మిత్ర</span>', heroLead: 'మీ లక్షణాలను సులభంగా చెప్పండి. ఆరోగ్య మిత్ర మీకు ముందుగా ఏం చేయాలో, ఎప్పుడు వైద్యుడిని కలవాలో, దగ్గరలోని ఆరోగ్య కేంద్రాన్ని ఎలా చేరుకోవాలో చెబుతుంది.', heroLead2: 'మీ లక్షణాలను తెలుగు లేదా ఇంగ్లీష్‌లో చెప్పండి. సులభమైన ప్రాథమిక ఆరోగ్య మార్గదర్శకత పొందండి.', start: '🩺 లక్షణాల పరీక్ష ప్రారంభించండి', nearby: '📍 దగ్గరలోని ఆరోగ్య కేంద్రం', trust: '✓ ASHAకు అనుకూలం  •  ✓ తక్కువ డేటా వినియోగం  •  ✓ సులభమైన తెలుగు  •  ✓ వైద్యుడికి ప్రత్యామ్నాయం కాదు',
+        heroCardTitle: 'మీ ఆరోగ్య మిత్రుడు', heroCardText: 'లక్షణాలను అర్థం చేసుకోవడానికి మరియు సరైన స్థాయి సంరక్షణను ఎంచుకోవడానికి సహాయపడే స్నేహపూర్వక మొదటి అడుగు.',
+        today: 'ఈరోజు ఆరోగ్య సూచన', todaySub: 'రోజువారీ ఆరోగ్య సూచన', waterTitle: 'సురక్షితమైన నీరు తాగండి', waterText: 'నీటిని మరిగించి లేదా సురక్షితమైన తాగునీటిని ఉపయోగించండి. ముఖ్యంగా విరేచనాలు ఉన్నప్పుడు తగినంత ద్రవాలను తీసుకోండి.', important: 'మీ కోసం ముఖ్యమైనవి', healthLog: 'నా ఆరోగ్య లాగ్', healthLogText: 'మీ గత symptom checks ను చూడండి.', vaccines: 'టీకాలు & పథకాలు', vaccinesText: 'టీకాలు మరియు ప్రభుత్వ ఆరోగ్య పథకాల సమాచారం.', nearbyTitle: 'దగ్గరలోని ఆరోగ్య కేంద్రం', nearbyText: 'PHC, ఆసుపత్రి మరియు టెలిమెడిసిన్ ఎంపికలు.',
+        checkTitle: '🩺 ఆరోగ్య మిత్ర Check', checkSub: 'దశలవారీ లక్షణాల మార్గదర్శకత', send: 'పంపండి', typePh: 'మీ లక్షణాన్ని టైప్ చేయండి...',
+        resultTitle: 'మీ ఆరోగ్య ఫలితం', resultSub: 'ప్రాథమిక triage మార్గదర్శకత', save: '💾 నా ఆరోగ్య లాగ్‌లో సేవ్ చేయండి', find: '📍 దగ్గరలోని ఆరోగ్య కేంద్రం',
+        healthTitle: '📖 నా ఆరోగ్య లాగ్', healthSub: 'మీ గత ఆరోగ్య పరీక్షలు', newCheck: '＋ కొత్త పరీక్ష', empty: 'ఇంకా Health Log లేదు', emptySub: 'మీ మొదటి symptom check ఇక్కడ కనిపిస్తుంది.',
+        careTitle: '📍 దగ్గరలోని ఆరోగ్య కేంద్రాలు', careSub: 'డెమో స్థానాలు — నిజమైన ప్రభుత్వ డేటాతో భర్తీ చేయండి.', phc: '🏥 ప్రాథమిక ఆరోగ్య కేంద్రం', asha: '👩‍⚕️ ASHA కార్యకర్త', contact: 'ASHAను సంప్రదించండి', tele: 'టెలిమెడిసిన్', emergency: 'అత్యవసర సహాయం', call: '108కు కాల్ చేయండి', connect: '📶 కనెక్టివిటీ', connectText: 'తక్కువ డేటా వినియోగం: స్క్రీన్‌లు తేలికగా ఉంచబడ్డాయి మరియు సేవ్ చేసిన స్థానిక లాగ్‌లను చూపించవచ్చు.',
+        reminderTitle: '💉 టీకాలు & ప్రభుత్వ పథకాలు', reminderSub: 'SIH ప్రోటోటైప్ కోసం డెమో సమాచారం.', child: '👶 పిల్లల టీకాలు', scheme: '🏥 ఆరోగ్యశ్రీ', schemeText: 'అర్హత ఉన్న కుటుంబాలకు ప్రభుత్వ ఆరోగ్య కవరేజ్ సమాచారాన్ని ఇక్కడ చూపించవచ్చు.', ashaSupport: '🤝 ASHA సహాయం', viewSchedule: 'షెడ్యూల్ చూడండి', schemeInfo: 'పథకం సమాచారం',
+        aboutTitle: 'ఎలా పనిచేస్తుంది', aboutSub: 'తెలుగు-ప్రాధాన్యత, తక్కువ డేటా వినియోగంతో లక్షణాల నుంచి సరైన ఆరోగ్య సేవ వరకు మార్గదర్శకత.', arch: 'SIH ప్రోటోటైప్ ఆర్కిటెక్చర్', teluguNlp: 'తెలుగు NLP + Triage',
+        steps: [['1️⃣', 'అర్థం చేసుకోండి', 'వినియోగదారు లక్షణాలను తెలుగు లేదా ఇంగ్లీష్‌లో చెబుతారు.'], ['2️⃣', 'ప్రశ్నలు అడగండి', 'బాట్ వ్యవధి, తీవ్రత మరియు ఇతర లక్షణాలను అడుగుతుంది.'], ['3️⃣', 'Triage', 'డెమో లాజిక్ self-care, PHC లేదా emergency మార్గదర్శకత ఇస్తుంది.'], ['4️⃣', 'సంరక్షణ', 'సులభమైన ఆహారం, విశ్రాంతి మరియు escalation సూచనలు చూపిస్తుంది.'], ['5️⃣', 'కనెక్ట్ అవ్వండి', 'దగ్గరలోని ప్రజా ఆరోగ్య సేవలను సూచిస్తుంది.'], ['6️⃣', 'గుర్తుంచుకోండి', 'కుటుంబం/ASHA సహాయంతో చూడటానికి డెమో చరిత్రను సేవ్ చేస్తుంది.']],
+        footer: 'ఆరోగ్య మిత్ర • SIH Front-End Prototype • ప్రాథమిక సమాచారం మాత్రమే — వృత్తిపరమైన వైద్య సలహాకు ప్రత్యామ్నాయం కాదు.'
+      },
+      en: {
+        nav: ['Home', 'Symptom Check', 'My Health', 'Nearby Care', 'How It Works'],
+        loginTitle: 'Welcome back 👋', loginSub: 'Welcome back to Arogya Mitra.', mobile: 'Mobile Number', pin: 'PIN / Password', mobilePh: 'Enter 10-digit mobile number', pinPh: 'Enter your PIN', remember: 'Remember me', demo: 'Demo login', loginBtn: '🔐 Login to Arogya Mitra', create: 'Create Account', createSub: 'Create a simple health profile for this prototype', name: 'Your Name', namePh: 'Enter your name', language: 'Preferred Language', createBtn: '👤 Create Health Profile',
+        heroTitle: 'Your health.<br><span style="color:var(--primary)">Arogya Mitra.</span>', heroLead: 'Describe your symptoms simply. Arogya Mitra helps you understand what to do first, when to see a doctor, and how to find nearby care.', heroLead2: 'Tell us your symptoms in Telugu or English and get simple preliminary health guidance.', start: '🩺 Start Symptom Check', nearby: '📍 Find Nearby Care', trust: '✓ ASHA-friendly  •  ✓ Low-bandwidth  •  ✓ Simple language  •  ✓ Not a doctor replacement',
+        heroCardTitle: 'Your Health Friend', heroCardText: 'A friendly first step for understanding symptoms and choosing the right level of care.',
+        today: 'Today’s Health Tip', todaySub: 'Daily health tip', waterTitle: 'Drink Safe Water', waterText: 'Use boiled or safe drinking water. Stay hydrated, especially when you have diarrhea.', important: 'Important for You', healthLog: 'My Health Log', healthLogText: 'View your previous symptom checks.', vaccines: 'Vaccines & Schemes', vaccinesText: 'Information about vaccinations and government health schemes.', nearbyTitle: 'Nearby Care', nearbyText: 'PHC, hospital and telemedicine options.',
+        checkTitle: '🩺 Arogya Mitra Check', checkSub: 'Step-by-step symptom guidance', send: 'Send', typePh: 'Type your symptom...',
+        resultTitle: 'Your Health Result', resultSub: 'Preliminary triage guidance', save: '💾 Save to My Health Log', find: '📍 Find Nearby Care',
+        healthTitle: '📖 My Health Log', healthSub: 'Your previous health checks', newCheck: '＋ New Check', empty: 'No Health Log yet', emptySub: 'Your first symptom check will appear here.',
+        careTitle: '📍 Nearby Healthcare', careSub: 'Demo locations — replace with live government data.', phc: '🏥 Primary Health Centre', asha: '👩‍⚕️ ASHA Worker', contact: 'Contact ASHA', tele: 'Telemedicine', emergency: 'Emergency', call: 'Call 108', connect: '📶 Connectivity', connectText: 'Low-bandwidth mode: screens stay lightweight and saved local logs can be shown.',
+        reminderTitle: '💉 Vaccines & Government Schemes', reminderSub: 'Demo information for the SIH prototype.', child: '👶 Child Immunization', scheme: '🏥 Aarogyasri', schemeText: 'Government health coverage information can be shown here for eligible families.', ashaSupport: '🤝 ASHA Support', viewSchedule: 'View Schedule', schemeInfo: 'Scheme Info',
+        aboutTitle: 'How It Works', aboutSub: 'A Telugu-first, low-bandwidth flow designed to guide users from symptoms to appropriate healthcare.', arch: 'SIH Prototype Architecture', teluguNlp: 'Telugu NLP + Triage',
+        steps: [['1️⃣', 'Understand', 'The user describes symptoms in Telugu or English.'], ['2️⃣', 'Ask', 'The bot asks about duration, severity and associated symptoms.'], ['3️⃣', 'Triage', 'Demo logic provides self-care, PHC or emergency guidance.'], ['4️⃣', 'Care', 'Shows simple food, rest and escalation guidance.'], ['5️⃣', 'Connect', 'Points users toward nearby public healthcare services.'], ['6️⃣', 'Remember', 'Saves demo history for family/ASHA-assisted tracking.']],
+        footer: 'Arogya Mitra • SIH Front-End Prototype • Preliminary information only — not a substitute for professional medical advice.'
+      }
+    };
+    function setText(id, text) { const e = document.getElementById(id); if (e) e.innerHTML = text }
+
+    function renderSteps() {
+      const container = document.querySelector('#about .grid'); if (!container) return;
+      const steps = translations[lang].steps;
+      container.innerHTML = steps.map(s => `<div class="card"><div class="cardIcon">${s[0]}</div><h3>${s[1]}</h3><p class="muted">${s[2]}</p></div>`).join('');
+    }
+
+    function applyLanguage() {
+      const t = translations[lang];
+      document.querySelectorAll('.navlinks button').forEach((b, i) => { if (t.nav[i]) b.textContent = t.nav[i] });
+      const ids = { heroTitle: 'heroTitle', heroLead: 'heroLead', heroLead2: 'heroLead2', start: 'start', nearby: 'nearby', heroCardTitle: 'heroCardTitle', heroCardText: 'heroCardText', today: 'today', todaySub: 'todaySub', waterTitle: 'waterTitle', waterText: 'waterText', important: 'important', healthLog: 'healthLog', healthLogText: 'healthLogText', vaccines: 'vaccines', vaccinesText: 'vaccinesText', nearbyTitle: 'nearbyTitle', nearbyText: 'nearbyText', checkTitle: 'checkTitle', checkSub: 'checkSub', send: 'send', resultTitle: 'resultTitle', resultSub: 'resultSub', save: 'save', find: 'find', healthTitle: 'healthTitle', healthSub: 'healthSub', newCheck: 'newCheck', careTitle: 'careTitle', careSub: 'careSub', phc: 'phc', asha: 'asha', contact: 'contact', tele: 'tele', emergency: 'emergency', call: 'call', connect: 'connect', connectText: 'connectText', reminderTitle: 'reminderTitle', reminderSub: 'reminderSub', child: 'child', scheme: 'scheme', schemeText: 'schemeText', ashaSupport: 'ashaSupport', viewSchedule: 'viewSchedule', schemeInfo: 'schemeInfo', aboutTitle: 'aboutTitle', aboutSub: 'aboutSub', arch: 'arch', teluguNlp: 'teluguNlp' };
+      Object.entries(ids).forEach(([k, id]) => setText(id, t[k]));
+      const input = document.getElementById('symptomInput'); if (input) input.placeholder = t.typePh;
+      const footer = document.querySelector('footer'); if (footer) footer.textContent = t.footer;
+      const lt = document.getElementById('loginTitle'); if (lt) lt.textContent = t.loginTitle;
+      const ls = document.getElementById('loginSub'); if (ls) ls.textContent = t.loginSub;
+      const ltab = document.getElementById('loginTab'); if (ltab) ltab.textContent = t.login === 'లాగిన్' ? 'లాగిన్' : 'Login';
+      const stab = document.getElementById('signupTab'); if (stab) stab.textContent = t.create;
+      document.querySelectorAll('#authLogin label')[0]?.replaceChildren(document.createTextNode(t.mobile));
+      document.querySelectorAll('#authLogin label')[1]?.replaceChildren(document.createTextNode(t.pin));
+      const lp = document.getElementById('loginPhone'); if (lp) lp.placeholder = t.mobilePh;
+      const pp = document.getElementById('loginPassword'); if (pp) pp.placeholder = t.pinPh;
+      document.querySelector('.loginOptions label')?.replaceChildren(document.createTextNode('✓ ' + t.remember));
+      const loginBtn = document.querySelector('#authLogin .loginBtn'); if (loginBtn) loginBtn.textContent = t.loginBtn;
+      document.querySelector('#authSignup .sub')?.replaceChildren(document.createTextNode(t.createSub));
+      document.querySelectorAll('#authSignup label')[0]?.replaceChildren(document.createTextNode(t.name));
+      document.querySelectorAll('#authSignup label')[1]?.replaceChildren(document.createTextNode(t.mobile));
+      document.querySelectorAll('#authSignup label')[2]?.replaceChildren(document.createTextNode(t.language));
+      document.getElementById('signupName')?.setAttribute('placeholder', t.namePh);
+      document.getElementById('signupPhone')?.setAttribute('placeholder', t.mobilePh);
+      const signupBtn = document.querySelector('#authSignup .loginBtn'); if (signupBtn) signupBtn.textContent = t.createBtn;
+      document.getElementById('appTe')?.classList.toggle('active', lang === 'te'); document.getElementById('appEn')?.classList.toggle('active', lang === 'en');
+      document.getElementById('loginTe')?.classList.toggle('active', lang === 'te'); document.getElementById('loginEn')?.classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang === 'te' ? 'te' : 'en';
+      renderHistory();
+      renderSteps();
+    }
+    function setAppLanguage(newLang) { lang = newLang; localStorage.setItem('arogyaLanguage', newLang); applyLanguage() }
+    function switchAuth(mode) {
+      const login = mode === 'login';
+      document.getElementById('authLogin').style.display = login ? 'block' : 'none';
+      document.getElementById('authSignup').style.display = login ? 'none' : 'block';
+      document.getElementById('loginTab').classList.toggle('active', login);
+      document.getElementById('signupTab').classList.toggle('active', !login);
+    }
+    function demoLogin() {
+      const demoUser = { name: 'SIH Demo User', phone: '', language: lang };
+      localStorage.setItem('arogyaUser', JSON.stringify(demoUser));
+      document.getElementById('loginPhone').value = '';
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginScreen').classList.remove('show');
+      document.getElementById('profileChip').textContent = '👤 SIH Demo User';
+      setAppLanguage(localStorage.getItem('arogyaLanguage') || lang || 'te');
+      showPage('home');
+    }
+    function performLogin() {
+      const phone = document.getElementById('loginPhone').value.trim(), pass = document.getElementById('loginPassword').value.trim();
+      if (!/^\d{10}$/.test(phone)) { alert('Please enter a valid 10-digit mobile number.'); return }
+      if (pass.length < 4) { alert('Enter a PIN/password with at least 4 characters.'); return }
+      localStorage.setItem('arogyaUser', JSON.stringify({ name: 'Arogya Mitra User', phone }));
+      enterApp();
+    }
+    function performSignup() {
+      const name = document.getElementById('signupName').value.trim(), phone = document.getElementById('signupPhone').value.trim(), language = document.getElementById('signupLanguage').value;
+      if (name.length < 2) { alert('Please enter your name.'); return }
+      if (!/^\d{10}$/.test(phone)) { alert('Please enter a valid 10-digit mobile number.'); return }
+      localStorage.setItem('arogyaUser', JSON.stringify({ name, phone, language }));
+      enterApp();
+    }
+    function enterApp() {
+      const user = JSON.parse(localStorage.getItem('arogyaUser') || '{}');
+      document.getElementById('loginScreen').classList.remove('show');
+      document.getElementById('profileChip').textContent = '👤 ' + (user.name || 'User');
+      lang = localStorage.getItem('arogyaLanguage') || (user.language === 'English' ? 'en' : 'te');
+      setAppLanguage(lang);
+      showPage('home');
+    }
+    function logout() {
+      localStorage.removeItem('arogyaUser');
+      document.getElementById('loginScreen').classList.add('show');
+      switchAuth('login');
+    }
+    function checkSession() {
+      const user = JSON.parse(localStorage.getItem('arogyaUser') || 'null');
+      if (user) { document.getElementById('loginScreen').classList.remove('show'); document.getElementById('profileChip').textContent = '👤 ' + (user.name || 'User'); lang = localStorage.getItem('arogyaLanguage') || (user.language === 'English' ? 'en' : 'te'); setAppLanguage(lang); }
+    }
+
+    function showPage(id) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); if (id === 'health') renderHistory() }
+    function toggleTheme() { document.body.classList.toggle('dark'); localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light') }
+    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+
+    function setLang(x) { lang = x; document.getElementById('teBtn').classList.toggle('selected', x === 'te'); document.getElementById('enBtn').classList.toggle('selected', x === 'en'); document.getElementById('symptomInput').placeholder = x === 'te' ? 'మీ లక్షణాన్ని టైప్ చేయండి...' : 'Type your symptom...'; startCheck() }
+    function startCheck() { showPage('check'); step = 0; answers = {}; symptom = ''; document.getElementById('chat').innerHTML = ''; ask() }
+    function addMsg(text, who = 'bot') { let d = document.createElement('div'); d.className = 'msg ' + who; d.textContent = text; document.getElementById('chat').appendChild(d); document.getElementById('chat').scrollTop = 99999 }
+    function ask() { let f = flows[lang][step]; document.getElementById('progress').style.width = (step / (flows[lang].length)) * 100 + '%'; addMsg(f.q); if (f.type === 'choice') { let q = document.createElement('div'); q.className = 'questionCard'; let row = document.createElement('div'); row.className = 'choiceRow'; f.opts.forEach(o => { let b = document.createElement('button'); b.className = 'choice'; b.textContent = o; b.onclick = () => answer(o); row.appendChild(b) }); q.appendChild(row); document.getElementById('chat').appendChild(q); document.getElementById('chat').scrollTop = 99999 } }
+    function sendSymptom() { if (flows[lang][step].type !== 'text') return; let v = document.getElementById('symptomInput').value.trim(); if (!v) return; document.getElementById('symptomInput').value = ''; answer(v) }
+    function answer(v) { answers[step] = v; addMsg(v, 'user'); if (step === 0) symptom = v; step++; if (step < flows[lang].length) setTimeout(ask, 350); else setTimeout(showResult, 450) }
+    function voiceMock() { addMsg(lang === 'te' ? '🎙️ Voice input demo: “జ్వరం మరియు తలనొప్పి ఉంది”' : '🎙️ Voice input demo: “I have fever and headache”', 'user'); setTimeout(() => { if (step === 0) answer(lang === 'te' ? 'జ్వరం మరియు తలనొప్పి' : 'fever and headache') }, 250) }
+    function showResult() {
+      document.getElementById('progress').style.width = '100%'; let emergency = (answers[3] || '').toLowerCase().includes(lang === 'te' ? 'అవును' : 'yes') || (answers[2] || '').toLowerCase().includes(lang === 'te' ? 'చాలా తీవ్రంగా' : 'very severe');
+      let risk = emergency ? 'red' : 'green'; if (!emergency && /week|వార/.test(answers[1] || '')) risk = 'yellow';
+      let data = risk === 'red' ? { icon: '🔴', title: lang === 'te' ? 'వెంటనే అత్యవసర వైద్య సహాయం పొందండి' : 'Seek emergency care immediately', text: lang === 'te' ? 'తీవ్రమైన లక్షణాలు ఉన్నందున ఇంట్లో మాత్రమే ఉండకండి. సమీప అత్యవసర కేంద్రాన్ని సంప్రదించండి.' : 'Because you reported a red-flag symptom, do not rely on home care alone.', tips: ['Call 108 if needed', 'Do not drive yourself if very unwell', 'Take your medicines/health records if available'] } :
+        risk === 'yellow' ? { icon: '🟡', title: lang === 'te' ? 'త్వరలో PHC ని సందర్శించండి' : 'Visit a PHC soon', text: lang === 'te' ? 'లక్షణాలు ఎక్కువకాలం కొనసాగుతున్నాయి. ఆరోగ్య కేంద్రంలో పరీక్ష చేయించుకోవడం మంచిది.' : 'Symptoms lasting longer should be assessed by a healthcare professional.', tips: ['Rest and monitor symptoms', 'Drink safe fluids', 'Escalate if symptoms worsen'] } :
+          { icon: '🟢', title: lang === 'te' ? 'ప్రాథమిక స్వీయ సంరక్షణ' : 'Self-care may be reasonable', text: lang === 'te' ? 'మీ సమాధానాల ఆధారంగా తక్షణ ప్రమాద సూచనలు కనిపించలేదు. లక్షణాలు మారితే వైద్యుడిని సంప్రదించండి.' : 'No immediate red flags were reported in this demo. Seek professional care if symptoms worsen.', tips: ['Rest adequately', 'Drink safe fluids', 'Choose simple local foods', 'Monitor for worsening symptoms'] };
+      document.getElementById('resultBox').innerHTML = `<div class="result"><div class="risk ${risk}">${data.icon} ${data.title}</div><p class="muted">${data.text}</p><h3>🥗 Care & Diet</h3><ul>${data.tips.map(x => `<li style="margin:8px 0">${x}</li>`).join('')}</ul><div class="grid" style="margin-top:18px"><button id="save" class="btn primary" onclick="saveCheck('${risk}')">💾 నా ఆరోగ్య లాగ్‌లో సేవ్ చేయండి</button><button class="btn secondary" onclick="showPage('care')">📍 Find Nearby Care</button></div><p class="muted" style="font-size:12px;margin-top:16px">Prototype only. This does not diagnose disease or replace a doctor.</p></div>`;
+      showPage('result');
+    }
+    function saveCheck(risk) { let item = { symptom: symptom || 'General symptom check', risk, date: new Date().toLocaleDateString('en-IN'), advice: risk === 'red' ? 'Emergency care' : risk === 'yellow' ? 'PHC visit soon' : 'Self-care & monitor' }; history.unshift(item); localStorage.setItem('arogyaHistory', JSON.stringify(history)); showPage('health') }
+    function renderHistory() { let el = document.getElementById('history'); if (!history.length) { const t = translations[lang]; el.innerHTML = `<div class="card"><h3>${t.empty}</h3><p class="muted">${t.emptySub}</p></div>`; return } el.innerHTML = history.map(x => `<div class="card healthItem"><div class="big">${x.risk === 'red' ? '🔴' : x.risk === 'yellow' ? '🟡' : '🟢'}</div><div><h3>${x.symptom}</h3><p class="muted">Checked: ${x.date} • ${x.advice}</p></div></div>`).join('') }
+    function openSOS() { document.getElementById('sosModal').classList.add('open') } function closeSOS() { document.getElementById('sosModal').classList.remove('open') }
+    function callNumber(n) { window.location.href = 'tel:' + n }
+    renderHistory();
+    setAppLanguage(localStorage.getItem('arogyaLanguage') || 'te');
+    checkSession();
+  </script>
+</body>
+
+</html>
